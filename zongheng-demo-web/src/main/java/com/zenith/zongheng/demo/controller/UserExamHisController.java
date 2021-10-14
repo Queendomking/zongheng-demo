@@ -1,6 +1,8 @@
 package com.zenith.zongheng.demo.controller;
 
 
+import com.zenith.zongheng.demo.domain.dto.ExamPaperDTO;
+import com.zenith.zongheng.demo.domain.entity.ExamPaper;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +28,12 @@ public class UserExamHisController {
     @Reference
     private UserExamHisService userExamHisService;
 
+
+    @PostMapping("/statUserExam")
+    public R statUserExam(@RequestBody ExamPaperDTO examPaperDTO) {
+        userExamHisService.statUserExam(examPaperDTO);
+        return R.ok();
+    }
 
     @PostMapping("/save")
     public R createUserExamHis(@RequestBody UserExamHisSaveDTO dto) {
@@ -55,6 +63,6 @@ public class UserExamHisController {
     public R list(@RequestBody(required = false) UserExamHisDTO dto) {
         return R.ok(userExamHisService.queryPage(dto));
     }
-    
+
 }
 

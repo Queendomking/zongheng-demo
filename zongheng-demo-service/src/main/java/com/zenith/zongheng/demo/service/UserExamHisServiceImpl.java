@@ -2,6 +2,8 @@ package com.zenith.zongheng.demo.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zenith.zongheng.demo.domain.dto.ExamPaperDTO;
+import com.zenith.zongheng.demo.domain.entity.ExamPaper;
 import com.zenith.zongheng.demo.domain.entity.UserExamHis;
 import com.zenith.zongheng.demo.dao.UserExamHisMapper;
 import com.zenith.zongheng.demo.api.UserExamHisService;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.Map;
+
 /**
  * <p>
  *  服务实现类
@@ -54,8 +58,13 @@ public class UserExamHisServiceImpl extends ServiceImpl<UserExamHisMapper, UserE
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void deleteUserExamHis(Long... ids) {
         this.removeByIds(Arrays.asList(ids));
+    }
+
+    @Override
+    public Map<String, Object> statUserExam(ExamPaperDTO examPaperDTO) {
+        return null;
     }
 }
