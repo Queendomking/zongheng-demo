@@ -12,13 +12,14 @@ server:
   port: 8080
   error:
     include-exception: true
- 
+
 zongheng:
   storage:
     local:
       localRootPath: c:/home/zenith/upload
+  # LogService ....
   log:
-    active: local
+    active: db
     path: c:/home/zenith/logs
   cors:
     enabled: true
