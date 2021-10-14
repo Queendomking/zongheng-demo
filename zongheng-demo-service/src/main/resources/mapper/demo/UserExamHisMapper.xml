@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zenith.zongheng.demo.dao.UserExamHisMapper">
+
+    <select id="selectPage" resultType="com.zenith.zongheng.demo.domain.vo.UserExamHisVO">
+        select id, user_id, question_id, user_option, correct_flag, point, create_time
+        from es_user_exam_his
+        <where>
+            <if test="dto.userId != null and dto.userId != ''">
+                and user_id = #{dto.userId}
+            </if>
+            <if test="dto.questionId != null and dto.questionId != ''">
+                and question_id = #{dto.questionId}
+            </if>
+            <if test="dto.userOption != null and dto.userOption != ''">
+                and user_option = #{dto.userOption}
+            </if>
+            <if test="dto.correctFlag != null and dto.correctFlag != ''">
+                and correct_flag = #{dto.correctFlag}
+            </if>
+            <if test="dto.point != null and dto.point != ''">
+                and point = #{dto.point}
+            </if>
+            <if test="dto.createTime != null and dto.createTime != ''">
+                and create_time = #{dto.createTime}
+            </if>
+        </where>
+        order by id desc
+    </select>
+</mapper>

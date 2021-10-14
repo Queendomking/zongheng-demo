@@ -1,0 +1,41 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+server:
+  uri-encoding: utf-8
+  servlet:
+    context-path: /tms
+  port: 8080
+  error:
+    include-exception: true
+
+zongheng:
+  storage:
+    local:
+      localRootPath: c:/home/zenith/upload
+  log:
+    active: local
+    path: c:/home/zenith/logs
+  cors:
+    enabled: true
+  shiro:
+    login:
+      err-retry-count: 4
+      err-retry-expire: 86400 #24小时
+      captcha-enabled: false
+    server:
+      cluster: false
+      super-admin-account: admin
+      jwt-expire: 7200
+      refresh-expire: 14400
+    client:
+      anon-url-list:
+        - /**/storage/**
+logging:
+  level:
+    # org.springframework.web: trace
+    org.springframework.boot.autoconfigure: INFO

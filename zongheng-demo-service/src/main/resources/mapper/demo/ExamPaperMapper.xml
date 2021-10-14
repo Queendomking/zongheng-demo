@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zenith.zongheng.demo.dao.ExamPaperMapper">
+
+    <select id="selectPage" resultType="com.zenith.zongheng.demo.domain.vo.ExamPaperVO">
+        select id, name, type, subject, grade, duration, remark
+        from es_exam_paper
+        <where>
+            <if test="dto.name != null and dto.name != ''">
+<!--                <bind name="_name" value="'%'+dto.name+'%'"/>-->
+<!--                and name like #{_name}-->
+                and name like concat('%',#{dto.name},'%')
+            </if>
+            <if test="dto.type != null and dto.type != ''">
+
+                and type = #{dto.type}
+            </if>
+            <if test="dto.subject != null and dto.subject != ''">
+                and subject = #{dto.subject}
+            </if>
+            <if test="dto.grade != null and dto.grade != ''">
+                and grade = #{dto.grade}
+            </if>
+            <if test="dto.duration != null and dto.duration != ''">
+                and duration = #{dto.duration}
+            </if>
+            <if test="dto.remark != null and dto.remark != ''">
+                and remark = #{dto.remark}
+            </if>
+        </where>
+        order by id desc
+    </select>
+</mapper>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>zongheng-parent</artifactId>
+        <groupId>com.zenith.zongheng</groupId>
+        <version>1.2.0</version>
+    </parent>
+    <groupId>com.zenith</groupId>
+    <artifactId>zongheng-demo</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>zongheng-demo-api</module>
+        <module>zongheng-demo-service</module>
+        <module>zongheng-demo-web</module>
+        <module>zongheng-demo-run</module>
+    </modules>
+
+    <profiles>
+        <profile>
+            <!-- 开发环境 -->
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+                <datasource.url><![CDATA[jdbc:mysql://127.0.0.1:3306/zongheng-demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8]]></datasource.url>
+                <datasource.driver>com.mysql.cj.jdbc.Driver</datasource.driver>
+                <datasource.username>root</datasource.username>
+                <datasource.password>root</datasource.password>
+            </properties>
+            <!-- 是否默认 true表示默认-->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <!-- 测试环境 -->
+            <id>test</id>
+            <properties>
+                <env>test</env>
+                <datasource.url><![CDATA[jdbc:mysql://127.0.0.1:3306/zongheng-demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8]]></datasource.url>
+                <datasource.driver>com.mysql.cj.jdbc.Driver</datasource.driver>
+                <datasource.username>root</datasource.username>
+                <datasource.password>root</datasource.password>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- 正式环境 -->
+            <id>prod</id>
+            <properties>
+                <env>prod</env>
+                <datasource.url><![CDATA[jdbc:mysql://127.0.0.1:3306/zongheng-demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8]]></datasource.url>
+                <datasource.driver>com.mysql.cj.jdbc.Driver</datasource.driver>
+                <datasource.username>root</datasource.username>
+                <datasource.password>root</datasource.password>
+            </properties>
+        </profile>
+    </profiles>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.zenith</groupId>
+                <artifactId>zongheng-demo-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zenith</groupId>
+                <artifactId>zongheng-demo-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zenith</groupId>
+                <artifactId>zongheng-demo-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

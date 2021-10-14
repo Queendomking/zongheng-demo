@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zenith.zongheng.demo.dao.QuestionMapper">
+
+    <select id="selectPage" resultType="com.zenith.zongheng.demo.domain.vo.QuestionVO">
+        select a.id, a.exam_paper_id,b.name as exam_paper_name, a.title_flag, a.type, a.title, a.parent_id, a.correct_flag, a.point, a.order_no, a.resolution
+        from es_question a left join es_exam_paper b on a.exam_paper_id = b.id
+        <where>
+            and title_flag = '1'
+            <if test="dto.examPaperId != null and dto.examPaperId != ''">
+                and exam_paper_id = #{dto.examPaperId}
+            </if>
+            <if test="dto.titleFlag != null and dto.titleFlag != ''">
+                and title_flag = #{dto.titleFlag}
+            </if>
+            <if test="dto.type != null and dto.type != ''">
+                and type = #{dto.type}
+            </if>
+            <if test="dto.title != null and dto.title != ''">
+                <bind name="_title" value="'%' + #{dto.title} +'%'"/>
+                and title = #{_title}
+            </if>
+            <if test="dto.parentId != null and dto.parentId != ''">
+                and parent_id = #{dto.parentId}
+            </if>
+            <if test="dto.correctFlag != null and dto.correctFlag != ''">
+                and correct_flag = #{dto.correctFlag}
+            </if>
+            <if test="dto.point != null and dto.point != ''">
+                and point = #{dto.point}
+            </if>
+            <if test="dto.orderNo != null and dto.orderNo != ''">
+                and order_no = #{dto.orderNo}
+            </if>
+            <if test="dto.resolution != null and dto.resolution != ''">
+                and resolution = #{dto.resolution}
+            </if>
+        </where>
+        order by parent_id,exam_paper_id,order_no
+    </select>
+</mapper>
