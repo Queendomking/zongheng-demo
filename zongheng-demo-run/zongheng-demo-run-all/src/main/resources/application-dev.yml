@@ -12,7 +12,7 @@ server:
   port: 8080
   error:
     include-exception: true
- 
+
 zongheng:
   storage:
     local:
@@ -35,6 +35,10 @@ zongheng:
     client:
       anon-url-list:
         - /**/storage/**
+
+
+
+
 logging:
   level:
     # org.springframework.web: trace
