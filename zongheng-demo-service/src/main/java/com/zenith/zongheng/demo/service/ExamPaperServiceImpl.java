@@ -98,7 +98,7 @@ public class ExamPaperServiceImpl extends ServiceImpl<ExamPaperMapper, ExamPaper
     }
 
     @Override
-    public List<ExamPaper> getExamPaperSelectList() throws ProcessException {
+    public List<ExamPaper> getExamPaperSelectList() {
         throw new ProcessException(ExamContantException.EXAM_NAME_ERROR);
         //return baseMapper.selectList(new QueryWrapper<ExamPaper>().orderByDesc(ExamPaper.ID));
     }
