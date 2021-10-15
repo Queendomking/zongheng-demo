@@ -1,25 +1,26 @@
 package com.zenith.zongheng.demo.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zenith.zongheng.core.util.StringUtil;
-import com.zenith.zongheng.demo.domain.entity.ExamPaper;
-import com.zenith.zongheng.demo.dao.ExamPaperMapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zenith.zongheng.common.domain.vo.PageVO;
+import com.zenith.zongheng.core.exception.ProcessException;
 import com.zenith.zongheng.demo.api.ExamPaperService;
+import com.zenith.zongheng.demo.contants.ExamContantException;
+import com.zenith.zongheng.demo.converter.ExamPaperConverter;
+import com.zenith.zongheng.demo.dao.ExamPaperMapper;
 import com.zenith.zongheng.demo.domain.dto.ExamPaperDTO;
 import com.zenith.zongheng.demo.domain.dto.ExamPaperSaveDTO;
+import com.zenith.zongheng.demo.domain.entity.ExamPaper;
 import com.zenith.zongheng.demo.domain.vo.ExamPaperVO;
-import com.zenith.zongheng.demo.converter.ExamPaperConverter;
-import com.zenith.zongheng.common.domain.vo.PageVO;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zenith.zongheng.system.api.SysDictService;
 import com.zenith.zongheng.system.domain.vo.SysDictVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -57,6 +58,11 @@ public class ExamPaperServiceImpl extends ServiceImpl<ExamPaperMapper, ExamPaper
         baseMapper.insert(entity);
     }
 
+    /**
+     * 创建试卷
+     * @param dto
+     * @return
+     */
     private String createExamPaperName(ExamPaperSaveDTO dto) {
         List<SysDictVO> examGradeList = sysDictService.getByCode("ExamGrade");
         List<SysDictVO> examTypeList = sysDictService.getByCode("ExamType");
@@ -70,8 +76,12 @@ public class ExamPaperServiceImpl extends ServiceImpl<ExamPaperMapper, ExamPaper
     }
 
 
+    /**
+     * 修改试卷
+     * @param dto
+     */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void updateExamPaper(ExamPaperSaveDTO dto) {
         ExamPaper entity = examPaperConverter.dto2ExamPaper(dto);
         // 生成试卷名称
@@ -88,7 +98,8 @@ public class ExamPaperServiceImpl extends ServiceImpl<ExamPaperMapper, ExamPaper
     }
 
     @Override
-    public List<ExamPaper> getExamPaperSelectList() {
-        return baseMapper.selectList(new QueryWrapper<ExamPaper>().orderByDesc(ExamPaper.ID));
+    public List<ExamPaper> getExamPaperSelectList() throws ProcessException {
+        throw new ProcessException(ExamContantException.EXAM_NAME_ERROR);
+        //return baseMapper.selectList(new QueryWrapper<ExamPaper>().orderByDesc(ExamPaper.ID));
     }
 }

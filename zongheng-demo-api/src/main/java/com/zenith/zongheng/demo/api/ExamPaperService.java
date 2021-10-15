@@ -1,5 +1,6 @@
 package com.zenith.zongheng.demo.api;
 
+import com.zenith.zongheng.core.exception.ProcessException;
 import com.zenith.zongheng.demo.domain.entity.ExamPaper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zenith.zongheng.demo.domain.dto.ExamPaperDTO;
@@ -23,6 +24,14 @@ public interface ExamPaperService extends IService<ExamPaper> {
 
     void saveExamPaper(ExamPaperSaveDTO dto);
 
+    /**
+     * 修改试卷
+     *
+     * @author tzx
+     * @method updateExamPaper
+     * @param dto
+     * @return
+     */
     void updateExamPaper(ExamPaperSaveDTO dto);
 
     void deleteExamPaper(Long ... id);
@@ -34,5 +43,5 @@ public interface ExamPaperService extends IService<ExamPaper> {
      * @method getExamPaperSelectList
      * @return 	java.util.List<com.zenith.zongheng.demo.domain.entity.ExamPaper>
      */
-    List<ExamPaper> getExamPaperSelectList();
+    List<ExamPaper> getExamPaperSelectList() throws ProcessException, ProcessException;
 }
